@@ -1,0 +1,563 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Practica 6 Sistemas Diferenciales</title><meta name="generator" content="MATLAB 9.3"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-05-21"><meta name="DC.source" content="Practica06.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Practica 6 Sistemas Diferenciales</h1><!--introduction--><p>Materia: <i>Se&ntilde;ales y Sistemas</i></p><p>Profesor: <i>Dr. Rafael Mart&iacute;nez Mart&iacute;nez</i></p><p>Grupo: <i>2TV1</i></p><p>Alumnos:</p><p><i>Panama Segura Sayuri</i></p><p><i>Perez Escobar Hiram Etzael</i></p><p><i>Robles Filio Eduardo</i></p><p><i>Rodriguez Moreno Luis Manuel</i></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Problema.</a></li><li><a href="#9">Apendice A</a></li></ul></div><h2 id="1">Problema.</h2><p>Sea un sistema diferencial representado por la siguiente expresi&oacute;n:</p><p><img src="Practica06_eq10766038043365417594.png" alt="$\frac{d^2}{dt^2}y(t)+2\frac{d}{dt}y(t)+2y(t)=\frac{d}{dt}x(t)+2x(t)$"></p><p>con condiciones iniciales:</p><p><img src="Practica06_eq13444050748327490533.png" alt="$y(0^-)=1 \qquad y'(0^-)=0$"></p><p>y entrada <img src="Practica06_eq05733120675232018958.png" alt="$x(t)=e^{-t}u(t)$"></p><p>Desarrolle:</p><div><ol><li>Muestra la funci&oacute;n de transferencia del sistema</li><li>Muestra la respuesta al impulso (simb&oacute;lico, gr&aacute;fica)</li><li>Muestra la respuesta a entrada cero (simb&oacute;lico, gr&aacute;fica)</li><li>Muestra la respuesta a estado cero (simb&oacute;lico, gr&aacute;fica)</li><li>Muestra la respuesta total (simb&oacute;lico, gr&aacute;fica)</li><li>La respuesta total al escal&oacute;n con condiciones iniciales 0 (simb&oacute;lico, gr&aacute;fica)</li><li>Usando subplot, depliega una figura con 5 gr&aacute;ficas</li></ol></div><p><b>Funci&oacute;n de transferencia</b></p><p>De acuerdo a la siguiente definic&iacute;on de funci&oacute;n de transferencia: <img src="Practica06_eq04865759165412649566.png" alt="$H(s)=\frac{P(s)}{Q(s)}$"></p><p>Y del hecho que podemos reescribir la ecuaci&oacute;n diferencial de la siguiente forma: <img src="Practica06_eq05237738070143848310.png" alt="$(D^2+2D+2)y(t)=(D+2)x(t)$"></p><p>Tenemos que: <img src="Practica06_eq05477066268258382486.png" alt="$Q(D)=D^2+2D+2 \qquad P(D)=D+2$"></p><p>Entonces la funci&oacute;n de transferencia es: <img src="Practica06_eq08444219943224116956.png" alt="$H(s)=\frac{s+2}{s^2+2s+2}$"></p><p><b>Respuesta al impulso</b></p><p>Para obtener la respuesta al impulso basta con realizar la llamada a la funci&oacute;n del Ap&eacute;ndice A con los siguientes par&aacute;metros:</p><p>Donde <img src="Practica06_eq14295067240762844718.png" alt="$xi$">, que es nuestra entrada del sistema, deber&aacute; ser una delta de Dirac adem&aacute;s de tener condiciones iniciales iguales a cero.</p><pre class="codeinput">syms <span class="string">t</span>
+a=[2 2 1];
+b=[2 1];
+ciy=[0 0];
+cix=0;
+xi=dirac(t);
+t0=15;
+laplace2016a(a,b,ciy,cix,xi,t0)
+</pre><pre class="codeoutput"> 
+APLICAMOS TRANSFORMADA DE LAPLACE y subtituimos condiciones iniciales
+ 
+                     2
+2 Y(s) + 2 s Y(s) + s  Y(s)
+
+=
+2 X(s) + s X(s)
+
+ 
+SUBSTITUIMOS LA TRANSFORMADA DE LA ENTRADA
+ 
+                     2
+2 Y(s) + 2 s Y(s) + s  Y(s)
+
+=
+s + 2
+
+ 
+DESPEJAMOS Y(s)
+ 
+Y(s)=
+    s + 2
+------------
+ 2
+s  + 2 s + 2
+
+ 
+DESARROLLAMOS LAS FRACCIONES PARCIALES DE Y(s)
+ 
+Y(s)=
+    s + 2
+------------
+ 2
+s  + 2 s + 2
+
+ 
+Aplicamos transformada inversa, asi la soluci&oacute;n es
+ 
+y(t)=
+exp(-t) (cos(t) + sin(t))
+
+</pre><img vspace="5" hspace="5" src="Practica06_01.png" alt=""> <p><b>Respuesta a entrada cero</b></p><p>Procedemos a llamar a la funci&oacute;n pero ahora con entrada <img src="Practica06_eq08236991412422294643.png" alt="$xi=0$"></p><pre class="codeinput">syms <span class="string">t</span>
+a=[2 2 1];
+b=[2 1];
+ciy=[1 0];
+cix=0;
+xi=0;
+t0=15;
+laplace2016a2(a,b,ciy,cix,xi,t0)
+</pre><pre class="codeoutput"> 
+APLICAMOS TRANSFORMADA DE LAPLACE y subtituimos condiciones iniciales
+ 
+                         2
+2 Y(s) - s + 2 s Y(s) + s  Y(s) - 2
+
+=
+2 X(s) + s X(s)
+
+ 
+SUBSTITUIMOS LA TRANSFORMADA DE LA ENTRADA
+ 
+                         2
+2 Y(s) - s + 2 s Y(s) + s  Y(s) - 2
+
+=
+0
+
+ 
+DESPEJAMOS Y(s)
+ 
+Y(s)=
+    s + 2
+------------
+ 2
+s  + 2 s + 2
+
+ 
+DESARROLLAMOS LAS FRACCIONES PARCIALES DE Y(s)
+ 
+Y(s)=
+    s + 2
+------------
+ 2
+s  + 2 s + 2
+
+ 
+Aplicamos transformada inversa, asi la soluci&oacute;n es
+ 
+y(t)=
+exp(-t) (cos(t) + sin(t))
+
+</pre><img vspace="5" hspace="5" src="Practica06_02.png" alt=""> <p><b>Respuesta a estado cero</b></p><p>Procedemos a llamar a la funci&oacute;n pero ahora con condiciones iniciales iguales a cero</p><pre class="codeinput">syms <span class="string">t</span>
+a=[2 2 1];
+b=[2 1];
+ciy=[0 0];
+cix=0;
+xi=exp(-t)*heaviside(t);
+t0=15;
+laplace2016a(a,b,ciy,cix,xi,t0)
+</pre><pre class="codeoutput"> 
+APLICAMOS TRANSFORMADA DE LAPLACE y subtituimos condiciones iniciales
+ 
+                     2
+2 Y(s) + 2 s Y(s) + s  Y(s)
+
+=
+2 X(s) + s X(s)
+
+ 
+SUBSTITUIMOS LA TRANSFORMADA DE LA ENTRADA
+ 
+                     2
+2 Y(s) + 2 s Y(s) + s  Y(s)
+
+=
+  s       2
+----- + -----
+s + 1   s + 1
+
+ 
+DESPEJAMOS Y(s)
+ 
+Y(s)=
+       s + 2
+-------------------
+ 3      2
+s  + 3 s  + 4 s + 2
+
+ 
+DESARROLLAMOS LAS FRACCIONES PARCIALES DE Y(s)
+ 
+Y(s)=
+  1           s
+----- - ------------
+s + 1    2
+        s  + 2 s + 2
+
+ 
+Aplicamos transformada inversa, asi la soluci&oacute;n es
+ 
+y(t)=
+exp(-t) - exp(-t) (cos(t) - sin(t))
+
+</pre><img vspace="5" hspace="5" src="Practica06_03.png" alt=""> <p><b>Respuesta total</b></p><p>Procedemos a llamar a nuestra funci&oacute;n pero con los parametros completos.</p><pre class="codeinput">syms <span class="string">t</span>
+a=[2 2 1];
+b=[2 1];
+ciy=[1 0];
+cix=0;
+xi=exp(-t)*heaviside(t);
+t0=15;
+laplace2016a(a,b,ciy,cix,xi,t0)
+</pre><pre class="codeoutput"> 
+APLICAMOS TRANSFORMADA DE LAPLACE y subtituimos condiciones iniciales
+ 
+                         2
+2 Y(s) - s + 2 s Y(s) + s  Y(s) - 2
+
+=
+2 X(s) + s X(s)
+
+ 
+SUBSTITUIMOS LA TRANSFORMADA DE LA ENTRADA
+ 
+                         2
+2 Y(s) - s + 2 s Y(s) + s  Y(s) - 2
+
+=
+  s       2
+----- + -----
+s + 1   s + 1
+
+ 
+DESPEJAMOS Y(s)
+ 
+Y(s)=
+     2
+    s  + 4 s + 4
+-------------------
+ 3      2
+s  + 3 s  + 4 s + 2
+
+ 
+DESARROLLAMOS LAS FRACCIONES PARCIALES DE Y(s)
+ 
+Y(s)=
+  1           2
+----- + ------------
+s + 1    2
+        s  + 2 s + 2
+
+ 
+Aplicamos transformada inversa, asi la soluci&oacute;n es
+ 
+y(t)=
+exp(-t) + 2 exp(-t) sin(t)
+
+</pre><img vspace="5" hspace="5" src="Practica06_04.png" alt=""> <p><b>Respuesta total al escal&oacute;n con condiciones iniciales 0</b></p><p>Procedemos a llamar a nuestra funci&oacute;n con <img src="Practica06_eq07060758873983679843.png" alt="$xi=u(t)$"> y condiciones iniciales iguales a cero</p><pre class="codeinput">syms <span class="string">t</span>
+a=[2 2 1];
+b=[2 1];
+ciy=[0 0];
+cix=0;
+xi=heaviside(t);
+t0=15;
+laplace2016a(a,b,ciy,cix,xi,t0)
+</pre><pre class="codeoutput"> 
+APLICAMOS TRANSFORMADA DE LAPLACE y subtituimos condiciones iniciales
+ 
+                     2
+2 Y(s) + 2 s Y(s) + s  Y(s)
+
+=
+2 X(s) + s X(s)
+
+ 
+SUBSTITUIMOS LA TRANSFORMADA DE LA ENTRADA
+ 
+                     2
+2 Y(s) + 2 s Y(s) + s  Y(s)
+
+=
+2
+- + 1
+s
+
+ 
+DESPEJAMOS Y(s)
+ 
+Y(s)=
+     s + 2
+---------------
+ 3      2
+s  + 2 s  + 2 s
+
+ 
+DESARROLLAMOS LAS FRACCIONES PARCIALES DE Y(s)
+ 
+Y(s)=
+1       s + 1
+- - ------------
+s    2
+    s  + 2 s + 2
+
+ 
+Aplicamos transformada inversa, asi la soluci&oacute;n es
+ 
+y(t)=
+1 - exp(-t) cos(t)
+
+</pre><img vspace="5" hspace="5" src="Practica06_05.png" alt=""> <p><b>Graficas</b></p><p><img vspace="5" hspace="5" src="Graficas_7.jpg" alt=""> </p><h2 id="9">Apendice A</h2><p><b>C&oacute;digo Sistemas diferenciales con Transformada de Laplace</b></p><pre class="language-matlab">
+<span class="keyword">function</span> laplace2016a(a,b,ciy,cix,xi,t0)
+<span class="comment">% a coeficientes de las derivadas de la salida menor a mayor [a_0, ..., a_n]</span>
+<span class="comment">% b coeficientes de las derivadas de la entrada menor a mayor [b_0, ..., b_m]</span>
+<span class="comment">% ciy condiciones iniciales de la salida de  menor a mayor [y(0), y(0)^(n-1)]</span>
+<span class="comment">% cix condiciones iniciales de la entrada de menor a meyor [x(0), x^(m-1)(0)]</span>
+<span class="comment">% xi funci&oacute;n de entrada en terminos de la variable simbolica t previamente</span>
+<span class="comment">% declarada en el command window</span>
+<span class="comment">% t0 tiempo final para graficar la solucion, la derivada, y la segunda </span>
+<span class="comment">% derivada </span>
+<span class="comment">% ejemplo: resolver y^(3)+y^(2)+2y^(1)+2y=3x^(2)-x^(1)+2x con y^(2)(0)=1 y^(1)=3</span>
+<span class="comment">% y(0)=2, x(0)=0 x^(1)=1, x(t)=exp(-t)cos(t)u(t), para 10 segundos, se resuleve como</span>
+<span class="comment">% syms t</span>
+<span class="comment">% laplace2016a([2 2 1 1],[2 -1 3],[2 3 1],[0 1],exp(-t)*cos(t)*heaviside(t),10)</span>
+close <span class="string">all</span>
+sympref(<span class="string">'HeavisideAtOrigin'</span>, 1);
+tam=size(a);
+tami=size(b);
+syms <span class="string">y(t)</span> <span class="string">Y(s)</span> <span class="string">x(t)</span> <span class="string">X(s)</span> <span class="string">Yy</span> <span class="string">fp</span>;
+syms <span class="string">edd</span> <span class="string">edi</span> 
+edd=0;
+edi=0;
+
+<span class="keyword">for</span> i=1:tam(2)
+   edd=edd+a(i)*s^(i-1)*Y(s);
+   <span class="keyword">for</span> k=1:i-1
+       edd=edd-a(i)*(s^(i-1-k)*ciy(k));
+   <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="keyword">for</span> i=1:tami(2)
+   edi=edi+b(i)*s^(i-1)*X(s);
+   <span class="keyword">for</span> k=1:i-1
+       edi=edi-b(i)*(s^(i-1-k)*cix(k));
+   <span class="keyword">end</span>
+<span class="keyword">end</span>
+mensaje(<span class="string">'APLICAMOS TRANSFORMADA DE LAPLACE y subtituimos condiciones iniciales'</span>)
+
+pretty(edd)
+disp(<span class="string">'='</span>)
+pretty(edi)
+
+mensaje(<span class="string">'SUBSTITUIMOS LA TRANSFORMADA DE LA ENTRADA'</span>)
+
+edi=subs(edi,X(s), laplace(xi));
+pretty(edd)
+disp(<span class="string">'='</span>)
+pretty(edi)
+
+mensaje(<span class="string">'DESPEJAMOS Y(s)'</span>)
+
+edd=collect(edd,Y(s));
+edd=subs(edd,Y(s),Yy);
+eq1=edd==edi;
+disp(<span class="string">'Y(s)='</span>)
+edd=solve(eq1, Yy);
+pretty(edd)
+
+<span class="comment">%%% Para versiones superiores a 2016</span>
+mensaje(<span class="string">'DESARROLLAMOS LAS FRACCIONES PARCIALES DE Y(s)'</span>)
+disp(<span class="string">'Y(s)='</span>)
+pretty(partfrac(edd))
+<span class="comment">%%%% Si se ejecuta en 2015 o menor comentar las 3 lineas anteriores</span>
+
+mensaje(<span class="string">'Aplicamos transformada inversa, asi la soluci&oacute;n es'</span>)
+disp(<span class="string">'y(t)='</span>)
+y(t)=ilaplace(edd);
+pretty(y(t))
+
+dy(t)=diff(y,t);
+ddy(t)=diff(dy,t);
+figure (1)
+hFig = figure(1);
+set(hFig, <span class="string">'Position'</span>, [0 0 900 900])
+axes1 = axes(<span class="string">'Parent'</span>,hFig,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16);
+tiempo=0:0.01:t0;
+subplot(2,1,1)
+fplot(xi,[0, t0],<span class="string">'b'</span>,<span class="string">'LineWidth'</span>,2)
+
+hold <span class="string">on</span>
+fplot(y,[0,t0],<span class="string">'r'</span>,<span class="string">'LineWidth'</span>,2)
+
+legend(<span class="string">'Entrada x(t)'</span>,<span class="string">'Salida y(t)'</span>,<span class="string">'Location'</span>,<span class="string">'Best'</span>)
+xlabel(<span class="string">'tiempo'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+title(<span class="string">'Entrada y Respuesta del sistema'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+grid <span class="string">on</span>
+subplot(2,1,2)
+fplot(dy,[0,t0],<span class="string">'g'</span>,<span class="string">'LineWidth'</span>,2)
+
+hold <span class="string">on</span>
+title(<span class="string">'Primera y segunda derivada de la salida'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+fplot(ddy,[0,t0],<span class="string">'m'</span>,<span class="string">'LineWidth'</span>,2)
+
+legend(<span class="string">'dy(t)/dt'</span>,<span class="string">'d^2y(t)/d^2t'</span>,<span class="string">'Location'</span>,<span class="string">'Best'</span>)
+xlabel(<span class="string">'tiempo'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+grid <span class="string">on</span>
+<span class="keyword">end</span>
+
+<span class="keyword">function</span> mensaje(texto)
+disp( <span class="string">' '</span>)
+disp(texto)
+disp( <span class="string">' '</span>)
+<span class="keyword">end</span>
+
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Practica 6 Sistemas Diferenciales
+%
+% Materia: _Señales y Sistemas_
+%
+% Profesor: _Dr. Rafael Martínez Martínez_
+%
+% Grupo: _2TV1_
+%
+% Alumnos:
+% 
+% _Panama Segura Sayuri_
+%
+% _Perez Escobar Hiram Etzael_
+%
+% _Robles Filio Eduardo_ 
+%
+% _Rodriguez Moreno Luis Manuel_
+%
+%% Problema.
+% 
+% Sea un sistema diferencial representado por la siguiente expresión:
+%
+% $\frac{d^2}{dt^2}y(t)+2\frac{d}{dt}y(t)+2y(t)=\frac{d}{dt}x(t)+2x(t)$
+%
+% con condiciones iniciales:
+%
+% $y(0^-)=1 \qquad y'(0^-)=0$
+%
+% y entrada $x(t)=e^{-t}u(t)$
+%
+% Desarrolle:
+%
+% # Muestra la función de transferencia del sistema
+% # Muestra la respuesta al impulso (simbólico, gráfica)
+% # Muestra la respuesta a entrada cero (simbólico, gráfica)
+% # Muestra la respuesta a estado cero (simbólico, gráfica)
+% # Muestra la respuesta total (simbólico, gráfica)
+% # La respuesta total al escalón con condiciones iniciales 0 (simbólico, gráfica)
+% # Usando subplot, depliega una figura con 5 gráficas
+%
+%%
+% *Función de transferencia*
+% 
+% De acuerdo a la siguiente definicíon de función de transferencia:
+% $H(s)=\frac{P(s)}{Q(s)}$
+%
+% Y del hecho que podemos reescribir la ecuación diferencial de la
+% siguiente forma: $(D^2+2D+2)y(t)=(D+2)x(t)$
+%
+% Tenemos que: $Q(D)=D^2+2D+2 \qquad P(D)=D+2$
+%
+% Entonces la función de transferencia es: $H(s)=\frac{s+2}{s^2+2s+2}$
+%
+%%
+% *Respuesta al impulso*
+% 
+% Para obtener la respuesta al impulso basta con realizar la llamada a la
+% función del Apéndice A con los siguientes parámetros:
+%
+% Donde $xi$, que es nuestra entrada del sistema, deberá ser una delta de
+% Dirac además de tener condiciones iniciales iguales a cero.
+syms t
+a=[2 2 1];
+b=[2 1];
+ciy=[0 0];
+cix=0;
+xi=dirac(t);
+t0=15;
+laplace2016a(a,b,ciy,cix,xi,t0)
+%%
+% *Respuesta a entrada cero*
+%
+% Procedemos a llamar a la función pero ahora con entrada $xi=0$
+syms t
+a=[2 2 1];
+b=[2 1];
+ciy=[1 0];
+cix=0;
+xi=0;
+t0=15;
+laplace2016a2(a,b,ciy,cix,xi,t0)
+%%
+% *Respuesta a estado cero*
+%
+% Procedemos a llamar a la función pero ahora con condiciones iniciales
+% iguales a cero
+syms t
+a=[2 2 1];
+b=[2 1];
+ciy=[0 0];
+cix=0;
+xi=exp(-t)*heaviside(t);
+t0=15;
+laplace2016a(a,b,ciy,cix,xi,t0)
+%%
+% *Respuesta total*
+%
+% Procedemos a llamar a nuestra función pero con los parametros completos.
+syms t
+a=[2 2 1];
+b=[2 1];
+ciy=[1 0];
+cix=0;
+xi=exp(-t)*heaviside(t);
+t0=15;
+laplace2016a(a,b,ciy,cix,xi,t0)
+%%
+% *Respuesta total al escalón con condiciones iniciales 0*
+%
+% Procedemos a llamar a nuestra función con $xi=u(t)$ y condiciones
+% iniciales iguales a cero
+syms t
+a=[2 2 1];
+b=[2 1];
+ciy=[0 0];
+cix=0;
+xi=heaviside(t);
+t0=15;
+laplace2016a(a,b,ciy,cix,xi,t0)
+%%
+% *Graficas*
+%
+% <<Graficas_7.jpg>>
+%
+%% Apendice A
+%
+% *Código Sistemas diferenciales con Transformada de Laplace*
+%
+% <include>laplace2016a.m</include>
+% 
+##### SOURCE END #####
+--></body></html>
